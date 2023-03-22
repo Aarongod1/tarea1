@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http//www.thymeleaf.org">
+    <head>
+        <title>TODO supply a title</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body>
+        <header th:replace="layout/plantilla :: header" />
+    <hi>Lista de clientes</hi>
+    <a th:href="@{/nuevoCliente}">Nuevo cliente</a>
+    <br />
+    <br />
+   <div th:if:"${clientes != null and !clientes.empty}">
+    <table border="1">
+        <thead>
+        <th>Nombre</th>
+        <th>Apellido</th>
+        <th>Correo</th>
+        <th>Telefono</th>
+        <th colsapn="2">Acciones</th>
+        </thead>
+        <tbody>
+            <tr th:each="item : ${clientes}">
+                <td th:text="${item.nombre}"></td>
+                <td th:text="${item.apellidos}"></td>
+                <td th:text="${item.telefono}"></td>
+                <td th:text="${item.correo}"></td>
+                <td><a th:href="@{/modificarCliente/} + ${item.idCliente}">Modificar</a></td>
+                <td><a th:href="@{/eliminarCliente/} + ${item.idCliente}">eliminar</a></td>
+                
+            </tr>
+        </tbody>
+    </table>
+    </body>
+</div>
+    <div th:if:"${clientes == null and  or clientes.empty}">
+        La lista esta vacia
+    </div>
+    <header th:replace="layout/plantilla :: footer" />
+</html>
